@@ -1,0 +1,86 @@
+/* Set the font and background */
+body {
+	font-family: 'Montserrat', sans-serif;
+	background-color: #f5f5f5;
+  }
+  
+  /* Center the content vertically */
+  body,
+  html {
+	height: 100%;
+  }
+  
+  body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+  }
+  
+  /* Style the heading */
+  h1 {
+	font-size: 3rem;
+	font-weight: 700;
+	color: #333;
+	margin-bottom: 2rem;
+  }
+  
+  /* Style the textarea */
+  textarea {
+	width: 100%;
+	height: 150px;
+	padding: 1rem;
+	margin-bottom: 2rem;
+	border: none;
+	border-radius: 6px;
+	background-color: #fff;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	font-size: 1rem;
+	color: #333;
+	resize: none;
+  }
+  
+  textarea::placeholder {
+	color: #999;
+  }
+  
+  /* Style the buttons */
+  button {
+	padding: 0.8rem 2.2rem;
+	margin-bottom: 1.5rem;
+	border: none;
+	border-radius: 6px;
+	background-color: #007bff;
+	color: #fff;
+	font-size: 1rem;
+	font-weight: 600;
+	letter-spacing: 0.5px;
+	text-transform: uppercase;
+	cursor: pointer;
+	transition: background-color 0.3s ease-in-out;
+  }
+  
+  button:hover {
+	background-color: #0056b3;
+  }
+  
+  /* Style the audio player */
+  #audio {
+	margin-top: 2rem;
+	width: 100%;
+  }
+  
+  /* Hide the audio controls by default */
+  audio {
+	display: none;
+  }
+  
+  /* Show the audio controls when audio is available */
+  #audio[controls] {
+	display: block;
+  }
+   .container {
+            border: 1px solid #000;
+            padding: 20px;
+            display: inline-block;
+        }
