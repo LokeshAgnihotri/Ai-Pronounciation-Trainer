@@ -9,6 +9,7 @@ import speech_recognition as sr
 from pydub import AudioSegment
 
 
+
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 
@@ -45,12 +46,10 @@ def getAudioFromText():
     return data
 
 @app.route(rootPath+'/send_text', methods=['POST'])
-def getText():
+def send_Text():
     event = {'body': json.dumps(request.get_json(force=True))}
     print(event)
-    data = request.get_json()
-    data = jsonify(data)
-    return data
+    return "success"
 
 
 @app.route('/random_word')
