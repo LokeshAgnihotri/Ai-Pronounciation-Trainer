@@ -12,8 +12,7 @@ The AI Pronunciation Trainer App is an innovative tool designed to help users im
 
 ## Installation
 1. Clone the repository to your local machine:
-git clone https://github.com/LokeshAgnihotri/ai-pronunciation-trainer.git
-
+git clone https://github.com/LokeshAgnihotri/Ai-Pronounciation-Trainer.git
 
 2. Install the required dependencies using the package manager of your choice:
 pip install -r requirements.txt
