@@ -1,11 +1,11 @@
 
 const _button_pronounce_trainer = document.getElementById("button_pronounce_trainer")
 const _reftext = document.getElementById("reftext")
+const audio = document.getElementById("audio`")
 
 _button_pronounce_trainer.onclick = function () {
 
-
-    fetch("http://127.0.0.1:5000/send_text",
+    fetch("http://127.0.0.1:5000/pronunciation_trainer",
         {
             method: 'POST',
             headers: {
@@ -14,17 +14,25 @@ _button_pronounce_trainer.onclick = function () {
             },
 
             body: JSON.stringify(_reftext.value)
-        }).then(res => {
-        if (res.ok) {
-            return res.json()
-        } else {
+        })
+        .then(response =>
+        {
+        if (response.ok)
+        {
+            return response.json()
+        } else
+        {
             alert("something is wrong")
         }
     }).then(jsonResponse => {
+        _reftext.value = 'The phoentics are :'+jsonResponse['phenome'];
 
-            // Log the response data in the console
-            console.log(jsonResponse)
-            _reftext.value = jsonResponse
+
+
+        document.getElementById("audioPlayer").src = jsonResponse['sound'];
+        audioPlayer.play();  // Play the audio
+
+
 
         }
     ).catch((err) => console.error(err));

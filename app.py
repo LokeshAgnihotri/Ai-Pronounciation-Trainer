@@ -6,7 +6,9 @@ import eng_to_ipa as ipa
 import pyttsx3
 from flask import make_response
 import speech_recognition as sr
-from pydub import AudioSegment
+import wave
+import audioop
+
 
 
 
@@ -37,6 +39,41 @@ def getAudio(file_name):
     return response
 
 
+
+
+#  A method to convert the text to speech using pyttsx3
+def convert_text_to_speech(text, audio_name_location):
+    engine = pyttsx3.init()
+    voices = engine.getProperty('voices')
+    engine.setProperty('voice', voices[1].id) #changing voice to index 1 for female voice
+    engine.save_to_file(text,audio_name_location)
+    engine.runAndWait()
+    return audio_name_location
+
+# convert text to IPA
+def convert_text_to_ipa(text):
+    return ipa.convert(text)
+
+# Send audio and phonetic transcription to the front end
+@app.route(rootPath+'/pronunciation_trainer', methods=['POST'])
+def pronunciation_trainer():
+    event = {'body': json.dumps(request.get_json(force=True))}
+    text = event['body']
+    # text = request.json['text']
+    phenome = convert_text_to_ipa(text)
+    sound = convert_text_to_speech(text, reference_recordings_path + "test.mpeg")
+
+    #   Create JSON response
+    response = {
+        'phenome': phenome,
+        'sound': sound
+    }
+    return json.dumps(response)
+
+
+
+
+
 @app.route(rootPath+'/receiver', methods=['POST'])
 def getAudioFromText():
     event = {'body': json.dumps(request.get_json(force=True))}
@@ -45,14 +82,13 @@ def getAudioFromText():
     data = jsonify(data)
     return data
 
-@app.route(rootPath+'/send_text', methods=['POST'])
-def send_Text():
-    event = {'body': json.dumps(request.get_json(force=True))}
-    print(event)
-    return "success"
 
 
-@app.route('/random_word')
+
+
+
+# Suggest next word
+@app.route('/next_word')
 def random_word():
     with open('english_dictionary.txt', 'r') as file:
         words = file.read().splitlines()
@@ -64,6 +100,8 @@ def random_word():
     pronunciation_audio_file = f"pronunciation_{random_word}.mpeg"
     engine.save_to_file(random_word, reference_recordings_path + pronunciation_audio_file)
     engine.runAndWait()
+
+    convert_text_to_speech(random_word, reference_recordings_path + pronunciation_audio_file)
 
     return jsonify({'random_word': random_word, 'random_word_ipa': random_word_ipa,
                     'pronunciation_audio': reference_recordings_path + pronunciation_audio_file})
