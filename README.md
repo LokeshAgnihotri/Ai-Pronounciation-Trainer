@@ -52,6 +52,3 @@ We welcome contributions from the open source community to enhance the AI Pronun
 
 ## Contact
 If you have any questions, suggestions, or feedback, please feel free to reach out to me at Lokesh.Agnihotri@outlook.com
-
-
-
