@@ -2,6 +2,7 @@ import unittest
 
 from app import app
 
+
 class AppTestCase(unittest.TestCase):
     def setUp(self):
         self.ctx = app.app_context()
@@ -26,8 +27,6 @@ class AppTestCase(unittest.TestCase):
     def test_random_word(self):
         response = self.client.get("/random_word")
         assert response.status_code == 200
-
-
 
 
 if __name__ == "__main__":
